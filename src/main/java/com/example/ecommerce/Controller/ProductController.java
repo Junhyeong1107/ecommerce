@@ -5,7 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.ecommerce.Entity.Product;
+
+import java.util.List;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -16,12 +21,16 @@ public class ProductController {
 
     @GetMapping("/products")
     public String listProducts(Model model) {
-        model.addAttribute("products", productService.findAllProducts());
+        List<Product> products = productService.findAllProducts();
+        model.addAttribute("products", products); // 모델에 products를 담아서 뷰로 전달
         return "index"; // 타임리프 템플릿 이름
     }
-    @GetMapping("/products/{id}")
-    public String getMethodName(@RequestParam String param) {
-        return new String();
+
+    @GetMapping("/test/pd")
+    @ResponseBody
+    public List<Product> listProducts() {
+        return productService.findAllProducts();
     }
+    
     
 }
