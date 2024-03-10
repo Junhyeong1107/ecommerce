@@ -7,9 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.ecommerce.Entity.Product;
-
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -24,6 +23,13 @@ public class ProductController {
         List<Product> products = productService.findAllProducts();
         model.addAttribute("products", products); // 모델에 products를 담아서 뷰로 전달
         return "index"; // 타임리프 템플릿 이름
+    }
+
+    @GetMapping("/product-detail/{id}")
+    public String productDetail(Model model, @PathVariable("id") Long id) {
+        Product product = productService.findProductById(id);
+        model.addAttribute("product", product);
+        return "product-detail";
     }
 
     @GetMapping("/test/pd")

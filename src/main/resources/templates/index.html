@@ -27,6 +27,7 @@
         <p class="card-text" th:text="${product.description}">상품 설명</p>
         <a href="#" class="btn btn-primary" th:text="${'₩' + product.price}">가격</a>
         <img th:src="${product.imageurl}" alt="상품 이미지" style="width: 100px; height: 100px;">
+        <a th:href="@{/product-detail/{id}(id=${product.id})}">상세보기</a>
         </div>
         <p>Main content of the website...</p>
     </div>
