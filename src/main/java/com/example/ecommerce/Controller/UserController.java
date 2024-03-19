@@ -23,4 +23,8 @@ public class UserController {
     public String signupForm() {
         return "signup"; // signup.html을 렌더링
     }
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login"; // login.html을 렌더링
+    }
 }

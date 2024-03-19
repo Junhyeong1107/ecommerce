@@ -19,13 +19,25 @@ public class SecurityConfig {
         http
            .csrf(AbstractHttpConfigurer::disable);
         http
-           .authorizeHttpRequests(
-                   authorize -> authorize
-                           .requestMatchers("/login").permitAll()
-                           .requestMatchers("/signup").permitAll()
-                           .anyRequest().permitAll()
-           );
-        return http.build();
+           .authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("/login").permitAll()
+                .requestMatchers("/signup").permitAll()
+                .anyRequest().permitAll()
+           )
+            .formLogin(formLogin -> formLogin
+                .loginPage("/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/products", true)
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login")
+                .permitAll()
+            ); 
+
+           return http.build();
     }
 
 
