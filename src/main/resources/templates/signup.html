@@ -14,13 +14,17 @@
     </header>
     <div class="container">
         <form action="#" th:action="@{/signup}" method="post">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required><br>
+            <label for="username">ID:</label>
+            <input type="text" id="username" name="username" required>
+            <button type="button" onclick="checkUserId()">ID 중복 체크</button><br>
+            <div id="usernameResult"></div> 
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required><br>
             <input type="submit" value="Register">
         </form>
     </div>
+    
+    <script th:src="@{/js/script.js}"></script>
     <footer>
         <p>Footer content here...</p>
     </footer>

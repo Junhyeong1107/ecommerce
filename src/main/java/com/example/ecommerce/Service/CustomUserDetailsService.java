@@ -23,13 +23,12 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("Cannot find user with username: " + username);
-        }
+        User user = userRepository.findByUsername(username)
+                                  .orElseThrow(() -> new UsernameNotFoundException("Cannot find user with username: " + username)); // optional 은 .orElseThrow()로 예외처리
         return new org.springframework.security.core.userdetails.User(
                 user.getUsername(),
                 user.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"))); // Example: assigning ROLE_USER to all authenticated users
     }
+    
 }
